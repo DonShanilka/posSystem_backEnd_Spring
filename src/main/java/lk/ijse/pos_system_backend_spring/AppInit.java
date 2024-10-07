@@ -1,6 +1,5 @@
 package lk.ijse.pos_system_backend_spring;
 
-
 import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletRegistration;
 import lk.ijse.pos_system_backend_spring.config.WebAppConfig;
