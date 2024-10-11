@@ -7,7 +7,6 @@ import lk.ijse.pos_system_backend_spring.dto.custom.impl.CustomerDto;
 import lk.ijse.pos_system_backend_spring.exception.CustomerNotFoundException;
 import lk.ijse.pos_system_backend_spring.exception.DataPersistException;
 import lk.ijse.pos_system_backend_spring.service.CustomerService;
-import lk.ijse.pos_system_backend_spring.service.impl.CustomerServiceImpl;
 import lk.ijse.pos_system_backend_spring.util.RegexUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
