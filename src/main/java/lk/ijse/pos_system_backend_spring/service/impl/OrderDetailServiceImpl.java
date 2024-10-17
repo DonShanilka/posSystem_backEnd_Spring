@@ -66,6 +66,11 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
 
     @Override
     public void deleteOrderDetail(String orderDetailId) {
-
+        Optional<OrderDetail> orderDetailOptional = orderDetailDao.findById(orderDetailId);
+        if (orderDetailOptional.isPresent()) {
+            orderDetailDao.deleteById(orderDetailId);
+        } else {
+            throw new OrderDetailNotFoundException("OrderDetail not found for deletion");
+        }
     }
 }
