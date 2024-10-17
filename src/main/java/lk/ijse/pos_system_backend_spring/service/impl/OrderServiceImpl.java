@@ -5,12 +5,14 @@ import lk.ijse.pos_system_backend_spring.dao.OrderDao;
 import lk.ijse.pos_system_backend_spring.dto.custom.impl.OrderDto;
 import lk.ijse.pos_system_backend_spring.entity.impl.Order;
 import lk.ijse.pos_system_backend_spring.exception.DataPersistException;
+import lk.ijse.pos_system_backend_spring.exception.OrderNotFoundException;
 import lk.ijse.pos_system_backend_spring.service.OrderService;
 import lk.ijse.pos_system_backend_spring.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -34,7 +36,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto getOrderById(String orderId) {
-        return null;
+        Optional<Order> orderOptional = orderDao.findById(orderId);
+
+        if (orderOptional.isPresent()) {
+            return mapping.toOrderDto(orderOptional.get());
+        } else {
+            throw new OrderNotFoundException("Order with ID " + orderId + " not found");
+        }
     }
 
     @Override
