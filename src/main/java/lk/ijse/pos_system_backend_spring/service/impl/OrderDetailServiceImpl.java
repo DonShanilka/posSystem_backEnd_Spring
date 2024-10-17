@@ -4,12 +4,14 @@ import lk.ijse.pos_system_backend_spring.dao.OrderDetailDao;
 import lk.ijse.pos_system_backend_spring.dto.custom.impl.OrderDetailsDto;
 import lk.ijse.pos_system_backend_spring.entity.impl.OrderDetail;
 import lk.ijse.pos_system_backend_spring.exception.DataPersistException;
+import lk.ijse.pos_system_backend_spring.exception.OrderDetailNotFoundException;
 import lk.ijse.pos_system_backend_spring.service.OrderDetailsService;
 import lk.ijse.pos_system_backend_spring.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderDetailServiceImpl implements OrderDetailsService {
@@ -32,7 +34,12 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
 
     @Override
     public OrderDetailsDto getOrderDetailById(String orderDetailId) {
-        return null;
+        Optional<OrderDetail> orderDetail = orderDetailDao.findById(orderDetailId);
+        if (orderDetail.isPresent()) {
+            return mapping.toOrderDetailDto(orderDetail.get());
+        } else {
+            throw new OrderDetailNotFoundException("OrderDetail not found");
+        }
     }
 
     @Override
