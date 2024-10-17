@@ -1,6 +1,7 @@
 package lk.ijse.pos_system_backend_spring.service.impl;
 
 
+import jakarta.transaction.Transactional;
 import lk.ijse.pos_system_backend_spring.customStatusCode.SelectedCustomerErrorStatus;
 import lk.ijse.pos_system_backend_spring.dao.CustomerDao;
 import lk.ijse.pos_system_backend_spring.dto.custom.CustomerStatus;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerDao dao;

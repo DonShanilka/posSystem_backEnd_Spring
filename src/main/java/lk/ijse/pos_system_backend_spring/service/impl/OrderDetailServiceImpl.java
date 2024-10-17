@@ -1,5 +1,6 @@
 package lk.ijse.pos_system_backend_spring.service.impl;
 
+import jakarta.transaction.Transactional;
 import lk.ijse.pos_system_backend_spring.dao.OrderDetailDao;
 import lk.ijse.pos_system_backend_spring.dto.custom.impl.OrderDetailsDto;
 import lk.ijse.pos_system_backend_spring.entity.impl.OrderDetail;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class OrderDetailServiceImpl implements OrderDetailsService {
 
     @Autowired

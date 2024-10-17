@@ -1,6 +1,7 @@
 package lk.ijse.pos_system_backend_spring.service.impl;
 
 
+import jakarta.transaction.Transactional;
 import lk.ijse.pos_system_backend_spring.customStatusCode.SelectedItemErrorStatus;
 import lk.ijse.pos_system_backend_spring.dao.ItemDao;
 import lk.ijse.pos_system_backend_spring.dto.custom.ItemStatus;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ItemServiceImpl implements ItemService {
 
     @Autowired
