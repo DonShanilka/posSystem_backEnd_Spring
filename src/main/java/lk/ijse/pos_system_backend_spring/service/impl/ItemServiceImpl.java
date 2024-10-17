@@ -1,7 +1,6 @@
 package lk.ijse.pos_system_backend_spring.service.impl;
 
 
-import jakarta.transaction.Transactional;
 import lk.ijse.pos_system_backend_spring.customStatusCode.SelectedItemErrorStatus;
 import lk.ijse.pos_system_backend_spring.dao.ItemDao;
 import lk.ijse.pos_system_backend_spring.dto.custom.ItemStatus;
@@ -14,6 +13,7 @@ import lk.ijse.pos_system_backend_spring.util.AppUtil;
 import lk.ijse.pos_system_backend_spring.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;

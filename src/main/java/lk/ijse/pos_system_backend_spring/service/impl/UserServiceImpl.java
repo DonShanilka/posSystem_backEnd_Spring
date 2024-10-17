@@ -1,12 +1,15 @@
 package lk.ijse.pos_system_backend_spring.service.impl;
 
+
 import lk.ijse.pos_system_backend_spring.dto.custom.impl.UserDto;
 import lk.ijse.pos_system_backend_spring.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UserDto userDto) {
