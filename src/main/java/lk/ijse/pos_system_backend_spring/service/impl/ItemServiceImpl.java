@@ -1,17 +1,36 @@
 package lk.ijse.pos_system_backend_spring.service.impl;
 
 
+import lk.ijse.pos_system_backend_spring.dao.ItemDao;
 import lk.ijse.pos_system_backend_spring.dto.custom.impl.ItemDto;
+import lk.ijse.pos_system_backend_spring.entity.impl.Item;
+import lk.ijse.pos_system_backend_spring.exception.DataPersistException;
 import lk.ijse.pos_system_backend_spring.service.ItemService;
+import lk.ijse.pos_system_backend_spring.util.AppUtil;
+import lk.ijse.pos_system_backend_spring.util.Mapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService {
-    @Override
-    public void saveItem(ItemDto itemDto) {
 
+    @Autowired
+    private ItemDao itemDao;
+
+    @Autowired
+    private Mapping mapping;
+
+    @Override
+    public void saveItem(ItemDto dto) {
+        dto.setItemCode(AppUtil.generateItemId());
+        Item itemEntity = mapping.toItemEntity(dto);
+
+        Item savedItem = itemDao.save(itemEntity);
+        if (savedItem == null) {
+            throw new DataPersistException("Item not saved");
+        }
     }
 
     @Override
