@@ -44,7 +44,8 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
 
     @Override
     public List<OrderDetailsDto> getAllOrderDetails() {
-        return List.of();
+        List<OrderDetail> allOrderDetails = orderDetailDao.findAll();
+        return mapping.asOrderDetailDto(allOrderDetails);
     }
 
     @Override
