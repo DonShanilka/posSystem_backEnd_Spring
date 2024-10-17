@@ -70,6 +70,11 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void deleteItem(String itemCode) {
-
+        Optional<Item> foundItem = itemDao.findById(itemCode);
+        if (!foundItem.isPresent()) {
+            throw new ItemNotFoundException("Item not found");
+        } else {
+            itemDao.deleteById(itemCode);
+        }
     }
 }
