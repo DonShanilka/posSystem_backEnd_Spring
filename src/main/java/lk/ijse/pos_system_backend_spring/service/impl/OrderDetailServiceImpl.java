@@ -50,7 +50,18 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
 
     @Override
     public void updateOrderdetail(String orderDetailId, OrderDetailsDto orderDetailDto) {
+        Optional<OrderDetail> orderDetailOptional = orderDetailDao.findById(orderDetailId);
+        if (orderDetailOptional.isPresent()) {
+            OrderDetail orderDetailToUpdate = orderDetailOptional.get();
 
+            orderDetailToUpdate.setQty(orderDetailDto.getQuantity());
+            orderDetailToUpdate.setUnitPrice(orderDetailDto.getUnitPrice());
+            orderDetailToUpdate.setItem(mapping.toItemEntity(orderDetailDto.getItemDto()));
+
+            orderDetailDao.save(orderDetailToUpdate);
+        } else {
+            throw new OrderDetailNotFoundException("OrderDetail not found for update");
+        }
     }
 
     @Override

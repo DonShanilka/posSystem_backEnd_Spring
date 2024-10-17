@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderDetailsDto implements OrderDetailsStatus {
     private Long orderDetailsId;
+    private ItemDto itemDto;
     private String itemCode;
     private int quantity;
     private double unitPrice;
