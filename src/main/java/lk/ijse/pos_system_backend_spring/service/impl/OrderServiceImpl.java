@@ -53,7 +53,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void updateOrder(String orderId, OrderDto orderDto) {
+        Optional<Order> orderOptional = orderDao.findById(orderId);
 
+        if (!orderOptional.isPresent()) {
+            throw new OrderNotFoundException("Order with ID " + orderId + " not found");
+        } else {
+            Order orderToUpdate = orderOptional.get();
+            orderToUpdate.setOrderDate(orderDto.getOrderDate());
+
+            orderDao.save(orderToUpdate);
+        }
     }
 
     @Override
