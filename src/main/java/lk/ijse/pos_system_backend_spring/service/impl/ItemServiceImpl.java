@@ -47,7 +47,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto> getAllItems() {
-        return List.of();
+        List<Item> allItems = itemDao.findAll();
+        return mapping.asItemDto(allItems);
     }
 
     @Override
