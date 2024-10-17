@@ -7,6 +7,7 @@ import lk.ijse.pos_system_backend_spring.dto.custom.ItemStatus;
 import lk.ijse.pos_system_backend_spring.dto.custom.impl.ItemDto;
 import lk.ijse.pos_system_backend_spring.entity.impl.Item;
 import lk.ijse.pos_system_backend_spring.exception.DataPersistException;
+import lk.ijse.pos_system_backend_spring.exception.ItemNotFoundException;
 import lk.ijse.pos_system_backend_spring.service.ItemService;
 import lk.ijse.pos_system_backend_spring.util.AppUtil;
 import lk.ijse.pos_system_backend_spring.util.Mapping;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -53,7 +55,17 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void updateItem(String itemCode, ItemDto itemDto) {
+        Optional<Item> byId = itemDao.findById(itemCode);
+        if (!byId.isPresent()) {
+            throw new ItemNotFoundException("Item not found");
+        } else {
+            Item itemToUpdate = byId.get();
+            itemToUpdate.setDescription(itemDto.getDescription());
+            itemToUpdate.setQty(Integer.parseInt(itemDto.getQty()));
+            itemToUpdate.setPrice(Double.parseDouble(itemDto.getPrice()));
 
+            itemDao.save(itemToUpdate);
+        }
     }
 
     @Override
